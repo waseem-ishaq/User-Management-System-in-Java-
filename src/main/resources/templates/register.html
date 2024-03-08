@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" th:replace="base::layout(~{::body})">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<section>
+    <div class="container p-3">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-header text-center fs-4">Register Page</div>
+
+                    <th:block th:if="${session.msg}">
+                        <p class="text-center text-success fs-4">[[${session.msg}]]</p>
+                        <th:block th:text="${@userServiceImpl.removeSessionMessage()}"></th:block>
+                    </th:block>
+
+                    <div class="card-body">
+                        <form action="saveUser" method="post">
+                            <div class="mb-3">
+                                <label>Enter Full Name</label> <input required type="text" name="name"
+                                                                      class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label>Enter Email</label> <input required type="text" name="email"
+                                                                  class="form-control">
+                            </div>
+
+                            <div class="mb-3">
+                                <label>Enter Mobile Number</label> <input required type="number"
+                                                                          name="mobileNo" class="form-control">
+                            </div>
+
+                            <div class="mb-3">
+                                <label>Enter Password</label> <input required type="text"
+                                                                     name="password" class="form-control">
+                            </div>
+                            <button class="btn btn-primary col-md-12">Register</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" th:replace="base::layout(~{::body})">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Management System</title>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="row">
+        <h1>Students List</h1>
+    </div>
+        <table class="table caption-top">
+            <div class="row">
+<!--                <th:block th:if="${user.getRole() == 'ROLE_ADMIN' }">-->
+                    <div>
+                        <a th:href="@{/students/new}" class="btn btn-primary btn-sm mb-3">Add Student</a>
+                    </div>
+<!--                </th:block>-->
+                <div >
+                    <a th:href="@{/logout}" class="btn btn-warning btn-sm mb-3">Logout</a>
+                </div>
+            </div>
+            <th:block th:if="${session.msg}">
+                <p class="text-center text-success fs-4">[[${session.msg}]]</p>
+                <th:block th:text="${@userServiceImpl.removeSessionMessage()}"></th:block>
+            </th:block>
+            <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Age</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="student: ${students}">
+                <th th:text="${student.id}"></th>
+                <td th:text="${student.first_name}"></td>
+                <td th:text="${student.last_name}"></td>
+                <td th:text="${student.age}"></td>
+                <td><div class="d-flex">
+                    <div class="">
+                        <a th:href="@{/students/view/{id}(id=${student.id})}" class="btn btn-primary btn-sm mb-3">View</a>
+                    </div>
+<!--                    <th:block th:if="${Temp.getRole() == 'ROLE_ADMIN'}">-->
+                        <div class="mx-1">
+                            <a th:href="@{/students/edit/{id}(id=${student.id})}" class="btn btn-success btn-sm mb-3">Update</a>
+                        </div>
+                        <div class="">
+                            <a th:href="@{/students/delete/{id}(id=${student.id})}" class="btn btn-danger btn-sm mb-3">Delete</a>
+                        </div>
+<!--                    </th:block>-->
+                </div></td>
+            </tr>
+            </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>
